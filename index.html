@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #4f46e5;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4338ca;
+}
+
+.qr-code {
+    margin-top: 20px;
+    display: none;
+}
+
+.qr-code img {
+    width: 180px;
+    height: 180px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <input type="text" id="qrInput" placeholder="Enter text or URL">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div class="qr-code" id="qrCodeBox">
+            <img id="qrImage" src="" alt="QR Code">
+        </div>
+    </div>
+
+    <script>
+        function generateQRCode() {
+    const input = document.getElementById("qrInput").value.trim();
+    const qrImage = document.getElementById("qrImage");
+    const qrCodeBox = document.getElementById("qrCodeBox");
+
+    if (input === "") {
+        alert("Please enter some text or a URL");
+        return;
+    }
+
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(input)}&size=180x180`;
+
+    qrImage.src = qrUrl;
+    qrCodeBox.style.display = "block";
+}
+
+    </script>
+</body>
+</html>
